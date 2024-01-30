@@ -1,49 +1,55 @@
-const express = require('express');
-const app = express();
-const fs = require('fs').promises;
+const { profile } = require('console');
+const {url} = require('inspector');
 
-app.get('/', async (req, res) => {
-    let co = (await fs.readFile('Website/html/index.hshare')).toString();
+let fs = require('fs').promises;
+exports.HandleProfileRoute = async function(pathSegments, request, response) {
+    if (pathSegments.length === 0) {
+        let web = (await fs.readFile('static/html/index.hshare')).toString();
 
-    let web = [
-        { name: 'Ahmad', url: '/web/ahmad' },
-        { name: 'Hannes', url: '/web/hannes' }
-    ];
-    let lis = '';
-    for (let i = 0; i < web.length; i++) {
-        let obj = web[i];
-        lis += `<li><a href="${obj.url}">${obj.name}</a></li>`;
+        let profiles =[{
+            name: 'overview',
+            url: '/web/overview'
+        },{
+            name: 'entrance',
+            url: 'web/entrance'
+        },{
+            name: 'entrance',
+            url: 'web/entrance'
+        }
+        ];
+        
+        let lis = '';
+        for (let i = 0; i < web.length; i++) {
+            let obj = profiles[i];
+            lis += `<li><a href="${obj.url}">${obj.name}</a></li>`;
+        }
+
+        web = web.replaceAll('profiles%', lis);
+        response.writeHead(200, { 'Content-Type': 'text/html'});
+        response.write(web);
+        response.end();
+        return;
     }
+    
+    let seg = pathSegments.shift();
 
-    co = co.replaceAll('%web%', lis);
+    let web = (await fs.readFile('static/html/index.hshare')).toString();
 
-    res.send(co);
-});
-
-app.get('/web/:profile', async (req, res) => {
-    let profile = req.params.profile;
-    let web = (await fs.readFile(`Website/html/${profile}.hshare`)).toString();
-
-    switch (profile) {
+    switch(seg) {
         case 'overview':
-            web = web.replace('%name%', 'Ahmad');
-            web = web.replace('%age%', '18');
-            web = web.replace('%gender%', 'man');
+            
             break;
-        case 'hannes':
-            web = web.replace('%name%', 'Hannes');
-            web = web.replace('%age%', '19');
-            web = web.replace('%gender%', 'man');
+        case 'entrance':
+            
             break;
         default:
-            res.status(404).send('404 Not Found');
-            return;
+        response.writeHead(404, { 'Content-Type': 'text/html'});
+        response.write('404 Not Found');
+        response.end();
+        return;
     }
 
-    res.send(web);
-});
-
-const port = 3001;
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+    response.writeHead(200, { 'Content-Type': 'text/html'});
+    response.write(web);
+    response.end();
+}

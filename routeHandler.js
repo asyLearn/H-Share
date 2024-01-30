@@ -3,12 +3,14 @@ const { web } = require('console');
 let profileHandler = require('./routeHandlers/profileHandler');
 exports.handleRoute = async function(pathSegments, request, response){
     if (pathSegments.length === 0){
-        let web = (await fs.readFile('Website/html/index.hshare')).toString();
+        let web = (await fs.readFile('static/html/index.hshare')).toString();
 
         response.writeHead(200, {'Content-Type': 'text/html'});
         response.write(web);
         response.end();
         return;
+
+        
     }
     let seg = pathSegments.shift();
 
