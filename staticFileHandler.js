@@ -41,7 +41,12 @@ exports.handleStaticFileRoute = async function (pathSegments, response) {
 		case 'js':
 			contentType = 'text/javascript';
 			break;
-		case 'jpg':
+		case 'png':
+			contentType = 'image/png'
+			break;
+		case 'hshare':
+			contentType = 'text/html';
+			break;
 		case 'jpeg':
 			contentType = 'image/jpeg';
 			break;

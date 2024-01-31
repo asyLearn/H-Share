@@ -35,12 +35,13 @@ exports.HandleProfileRoute = async function(pathSegments, request, response) {
 
     let web = (await fs.readFile('static/html/index.hshare')).toString();
 
+
     switch(seg) {
         case 'overview':
-            
+            request = fs.readFile('static/html/overview.hshare').toString();
             break;
         case 'entrance':
-            
+            request = fs.readFile('static/html/index.hshare').toString();
             break;
         default:
         response.writeHead(404, { 'Content-Type': 'text/html'});

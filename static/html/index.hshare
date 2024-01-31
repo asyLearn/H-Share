@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to H-Share</title>
     <link rel="stylesheet" href="/static/css/mainstyle.css">
-    <script src="/static/js/main.js"></script>
+    <script src="/static/js/main.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container">            
-        <div class="dropdown">
-         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Language Option
-         <span class="caret"></span></button>
-         <ul class="dropdown-menu">
-           <li><a href="#">English</a></li>
-           <li><a href="#">Swedish</a></li>
-         </ul>
-       </div>
-     </div>
+  <div class="head">
+
+  </div>
+  <div class="content">
+    <input type="file">
+    <form method="post" enctype="multipart/form-data">
+      <input name="file" type="file" multiple>
+      <button type="submit">Upload Here</button>
+    </form>
+  <label class="switch">
+    <input id="switch" type="checkbox">
+    <span class="slider round"></span>
+  </label>
+    
+  </div>
+    
+     
 </body>
 </html>
