@@ -13,11 +13,13 @@
 
   </div>
   <div class="content">
-    <input type="file">
-    <form method="post" enctype="multipart/form-data">
-      <input name="file" type="file" multiple>
-      <button type="submit">Upload Here</button>
-    </form>
+    <h1>Upp-laddningssida</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="file">Välj fil att ladda upp:</label>
+    <input type="file" name="file" id="file" required>
+    <br>
+    <input type="submit" value="Ladda upp">
+  </form>
   <label class="switch">
     <input id="switch" type="checkbox">
     <span class="slider round"></span>

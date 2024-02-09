@@ -32,6 +32,12 @@ exports.handleStaticFileRoute = async function (pathSegments, response) {
 
 	let contentType;
 	switch (ext) {
+		case 'txt':
+			contentType = 'plain/txt';
+			break;
+		case 'zip':
+			contentType = 'application/zip';
+			break;
 		case 'html':
 			contentType = 'text/html';
 			break;

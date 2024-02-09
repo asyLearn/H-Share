@@ -2,6 +2,7 @@ let http = require('http');
 let fs = require('fs').promises;
 let routeHandler = require('./routeHandler');
 let staticFileHandler = require('./staticFileHandler');
+const uploadHandler = require('./routeHandlers/uploadHandler');
 let port = 8090;
 
 async function handleRequest(request, response){
@@ -17,8 +18,10 @@ async function handleRequest(request, response){
 
 			staticFileHandler.handleStaticFileRoute(pathSegments, response);
 			return;
-
-	}   
+	}   else if (pathSegments.length > 0 && pathSegments[0] === 'upload' && request.method === 'POST') {
+        uploadHandler.handleUpload(request, response);
+        return;
+    }
 
     await routeHandler.handleRoute(pathSegments, request, response);
 }

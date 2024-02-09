@@ -18,11 +18,7 @@ exports.HandleProfileRoute = async function(pathSegments, request, response) {
         }
         ];
         
-        let lis = '';
-        for (let i = 0; i < web.length; i++) {
-            let obj = profiles[i];
-            lis += `<li><a href="${obj.url}">${obj.name}</a></li>`;
-        }
+
 
         web = web.replaceAll('profiles%', lis);
         response.writeHead(200, { 'Content-Type': 'text/html'});
